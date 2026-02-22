@@ -1,0 +1,241 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    background: #020617;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+/* === BACKGROUND ANIMATION === */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at bottom center, #1b2735 0%, #090a0f 100%);
+    overflow: hidden;
+}
+
+.nebula {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at top right, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    animation: moveNebula 25s infinite alternate linear;
+    z-index: 0;
+}
+
+@keyframes moveNebula {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-5%, -5%) rotate(5deg); }
+}
+
+.star-generated {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
+    z-index: 0;
+}
+
+@keyframes twinkle-effect {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* === TAMBAHAN: Animasi Bintang Jatuh Aesthetic & Pelan === */
+.shooting-star {
+    position: absolute;
+    width: 300px; 
+    height: 2px;
+    background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+    opacity: 0;
+    animation: shoot 10s ease-in-out infinite;
+    z-index: 0;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 7px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #fff, 0 0 30px #fff, 0 0 45px rgba(99, 102, 241, 0.8);
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(200px) translateY(-200px) rotate(-45deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    70% { opacity: 1; }
+    100% {
+        transform: translateX(-1500px) translateY(1500px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+
+/* === GLASS CARD STYLE === */
+.main-wrapper {
+    padding: 20px;
+    z-index: 10; 
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 35px;
+    padding: 30px 20px; /* Padding sedikit disesuaikan agar area scroll nyaman */
+    width: 100%;
+    max-width: 380px;
+    height: 550px; /* Menggunakan height fix agar kotak tidak memanjang */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background: linear-gradient(45deg, #6366f1, #ec4899);
+    filter: blur(120px);
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+/* === KONTEN KARTU === */
+.img-wrapper {
+    transform: translateZ(60px); 
+}
+
+/* Stiker Normal */
+.sticker-glow {
+    width: 150px;
+    height: auto;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+    animation: stickerFloat 4s ease-in-out infinite;
+}
+
+/* Stiker BESAR */
+.sticker-big-glow {
+    width: 220px; 
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+    animation: stickerFloat 4s ease-in-out infinite;
+}
+
+@keyframes stickerFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* === GALERI FOTO === */
+.photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+    transform: translateZ(30px);
+}
+
+.memory-photo {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+/* Typography & Buttons */
+h1.header-text {
+    color: #fff; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.2); transform: translateZ(30px);
+}
+h2 { color: #fff; font-weight: 600; margin-bottom: 15px; transform: translateZ(40px); }
+p { color: #cbd5e1; line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; transform: translateZ(30px); }
+.greeting, .highlight { color: #fff; font-weight: 700; font-size: 1.1rem; }
+.joke { font-size: 0.9rem; opacity: 0.9; }
+.islamic { color: #a5b4fc; font-style: italic; margin-top: 15px; transform: translateZ(35px); }
+.line-divider { height: 2px; width: 60px; background: rgba(255,255,255,0.2); margin: 20px auto; border-radius: 10px; transform: translateZ(20px); }
+
+.btn-modern {
+    padding: 12px 30px; border-radius: 50px; border: none; background: #fff; color: #020617; font-weight: 700; font-size: 0.9rem; cursor: pointer; margin-top: 20px; margin-bottom: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,255,255,0.1); transform: translateZ(50px);
+}
+.btn-modern:hover { background: #e2e8f0; transform: translateZ(60px) scale(1.05); box-shadow: 0 10px 25px rgba(255,255,255,0.3); }
+
+/* === SLIDE LOGIC & SCROLL AESTHETIC === */
+.slide { 
+    display: none; 
+    opacity: 0; 
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+    
+    /* Aturan untuk scroll */
+    max-height: 480px; /* Batas tinggi konten sebelum di-scroll */
+    overflow-y: auto;  /* Memunculkan scroll jika konten panjang */
+    overflow-x: hidden;
+    padding: 10px 15px; /* Memberi ruang bernapas untuk teks */
+}
+
+.slide.active { 
+    display: block; 
+    animation: slideInFade 0.7s forwards; 
+}
+
+@keyframes slideInFade { 
+    from { opacity: 0; transform: translateY(20px) scale(0.95); } 
+    to { opacity: 1; transform: translateY(0) scale(1); } 
+}
+
+/* Kustomisasi Scrollbar agar transparan dan elegan */
+.slide::-webkit-scrollbar {
+    width: 5px; /* Lebar scrollbar */
+}
+
+.slide::-webkit-scrollbar-track {
+    background: transparent; /* Background track transparan */
+}
+
+.slide::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15); /* Warna putih transparan */
+    border-radius: 10px;
+}
+
+.slide::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4); /* Terang dikit saat digeser */
+}
